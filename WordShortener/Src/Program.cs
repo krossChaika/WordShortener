@@ -18,7 +18,13 @@ class Program
              }
 
              Console.WriteLine("Enter character to use as filler: ");
-             char dotChar = Console.ReadLine()[0];
+             string charInput = Console.ReadLine();
+             if (charInput is null || charInput.Length < 1)
+             {
+                 Console.WriteLine("Incorrect filler symbol!");
+                 continue;
+             }
+             char dotChar = charInput[0];
              
              Console.WriteLine("Enter strings separated by spaces: ");
              inputs = Console.ReadLine().Split(' ').ToList();
