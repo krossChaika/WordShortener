@@ -4,6 +4,53 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+         const int minLength = 3;
+         int desiredLength = 0;
+         List<string> inputs;
+
+         while (true)
+         {
+             Console.WriteLine("Enter length: ");
+             if (!int.TryParse(Console.ReadLine(), out desiredLength) || desiredLength < minLength)
+             {
+                 Console.WriteLine("Length is too short!");
+                 continue;
+             }
+             
+             Console.WriteLine("Enter strings separated by spaces: ");
+             inputs = Console.ReadLine().Split(' ').ToList();
+             if (inputs.Min(x => x.Length) < desiredLength)
+             {
+                 Console.WriteLine("One of the strings is less than the desired result length!");
+                 continue;
+             }
+
+             List<string> history = new(inputs.Count);
+             foreach (string input in inputs)
+             {
+                 string result = "";
+                 int dotsCount = 3;
+                 if (input.Length == 3)
+                 {
+                     result = input[0] + "." + input[2];
+                 }
+                 else if (input.Length == 4)
+                 {
+                     result = input[0] + ".." + input[3];
+                 }
+                 else
+                 {
+                     int prefixLen = (desiredLength - dotsCount) / 2;
+                     int suffixLen = desiredLength - dotsCount - prefixLen;
+
+                     result = input.Substring(0, prefixLen) 
+                                       + new string('.', dotsCount) + input.Substring(input.Length - suffixLen);
+                 }
+
+                 Console.WriteLine(result);
+             }
+         }
+         
+         Console.ReadKey();
     }
 }
