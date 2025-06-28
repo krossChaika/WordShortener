@@ -1,9 +1,13 @@
-﻿namespace WordShortener;
+﻿using System.Text;
+
+namespace WordShortener;
 
 class Program
 {
     static void Main(string[] args)
     {
+         Console.InputEncoding = System.Text.Encoding.Unicode;
+         Console.OutputEncoding = System.Text.Encoding.Unicode;
          const int minLength = 3;
          int desiredLength = 0;
          List<string> inputs;
