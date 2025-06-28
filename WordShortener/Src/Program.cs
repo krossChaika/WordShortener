@@ -46,8 +46,15 @@ class Program
                      result = input.Substring(0, prefixLen) 
                                        + new string('.', dotsCount) + input.Substring(input.Length - suffixLen);
                  }
-
-                 Console.WriteLine(result);
+                 
+                 string newResult = result;
+                 while (history.Contains(newResult))
+                 {
+                     newResult = result;
+                     result += history.Count(x => x == result);
+                 }
+                 Console.WriteLine(input + " -> " + newResult);
+                 history.Add(newResult);
              }
          }
          
