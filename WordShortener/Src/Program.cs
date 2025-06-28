@@ -16,6 +16,9 @@ class Program
                  Console.WriteLine("Length is too short!");
                  continue;
              }
+
+             Console.WriteLine("Enter character to use as filler: ");
+             char dotChar = Console.ReadLine()[0];
              
              Console.WriteLine("Enter strings separated by spaces: ");
              inputs = Console.ReadLine().Split(' ').ToList();
@@ -32,11 +35,11 @@ class Program
                  int dotsCount = 3;
                  if (input.Length == 3)
                  {
-                     result = input[0] + "." + input[2];
+                     result = input[0] + $"{dotChar}" + input[2];
                  }
                  else if (input.Length == 4)
                  {
-                     result = input[0] + ".." + input[3];
+                     result = input[0] + $"{dotChar}{dotChar}" + input[3];
                  }
                  else
                  {
@@ -44,7 +47,7 @@ class Program
                      int suffixLen = desiredLength - dotsCount - prefixLen;
 
                      result = input.Substring(0, prefixLen) 
-                                       + new string('.', dotsCount) + input.Substring(input.Length - suffixLen);
+                                       + new string(dotChar, dotsCount) + input.Substring(input.Length - suffixLen);
                  }
                  
                  string newResult = result;
